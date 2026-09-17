@@ -1,0 +1,45 @@
+{
+  "cleanUrls": false,
+  "rewrites": [
+    {
+      "source": "/_website-element-widget",
+      "destination": "/_website-element-widget.html"
+    },
+    {
+      "source": "/RSVP_files/_website-element-widget",
+      "destination": "/_website-element-widget.html"
+    },
+    {
+      "source": "/Home.html/_website-element-widget",
+      "destination": "/_website-element-widget.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)\\.mp4",
+      "headers": [
+        {
+          "key": "Accept-Ranges",
+          "value": "bytes"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(woff|woff2|ttf)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    }
+  ]
+}
