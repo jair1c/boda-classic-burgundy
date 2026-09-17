@@ -1,4 +1,3 @@
 @echo off
-cd /d "%~dp0"
-node server.js
+node local_server.js
 pause

@@ -86,12 +86,12 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Si el navegador pide /Home.html/_assets/... o /Home.html/Home_files/..., corregir la ruta
+  // Si el navegador pide /Home.html/assets/... o /Home.html/Home_files/..., corregir la ruta
   decoded = decoded.replace(/^\/[^/]+\.html\//i, '/');
 
   // Si la petición es para el widget de reservación (RSVP)
   if (decoded.includes('_website-element-widget')) {
-    decoded = '/_website-element-widget.html';
+    decoded = '/website-element-widget.html';
   }
 
   // Si la ruta es /rsvp o /Home.html/rsvp
