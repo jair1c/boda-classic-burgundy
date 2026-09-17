@@ -42,21 +42,16 @@ const server = http.createServer((req, res) => {
 
         // 2. Guardar en confirmaciones_rsvp.csv (para abrir en Excel)
         const csvPath = path.join(demoDir, 'confirmaciones_rsvp.csv');
-        const csvHeader = 'Fecha,Nombre,Email,Asistencia,Entrada,Plato,Postre,Alergias,Otras Alergias,Notas\n';
+        const csvHeader = 'Fecha,Nombre,Asistencia,Acompañantes,Mensaje\n';
         if (!fs.existsSync(csvPath)) {
           fs.writeFileSync(csvPath, '\uFEFF' + csvHeader, 'utf8');
         }
         const row = [
           new Date().toLocaleString(),
-          `"${(data.name || '').replace(/"/g, '""')}"`,
-          `"${(data.email || '').replace(/"/g, '""')}"`,
-          `"${(data.attendance || '').replace(/"/g, '""')}"`,
-          `"${(data.starter || '').replace(/"/g, '""')}"`,
-          `"${(data.entree || '').replace(/"/g, '""')}"`,
-          `"${(data.dessert || '').replace(/"/g, '""')}"`,
-          `"${(data.dietary || '').replace(/"/g, '""')}"`,
-          `"${(data.dietaryOther || '').replace(/"/g, '""')}"`,
-          `"${(data.notes || '').replace(/"/g, '""')}"`
+          `"${(data.nombre || data.name || '').replace(/"/g, '""')}"`,
+          `"${(data.asistencia || data.attendance || '').replace(/"/g, '""')}"`,
+          `"${(data.acompanantes || '0').replace(/"/g, '""')}"`,
+          `"${(data.mensaje || data.notes || '').replace(/"/g, '""')}"`
         ].join(',') + '\n';
         fs.appendFileSync(csvPath, row, 'utf8');
 
@@ -77,7 +72,7 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  if (decoded === '/' || decoded === '') decoded = '/Home.html';
+  if (decoded === '/' || decoded === '') decoded = '/index.html';
 
   // Si tiene barra al final de un archivo .html (ej. /Home.html/), redirigir
   if (decoded.match(/\.html\/+$/i)) {
