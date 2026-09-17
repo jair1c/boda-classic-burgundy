@@ -1,18 +1,8 @@
 {
   "cleanUrls": false,
-  "rewrites": [
-    {
-      "source": "/_website-element-widget(.*)",
-      "destination": "/website-element-widget.html"
-    },
-    {
-      "source": "/(.*)/_website-element-widget(.*)",
-      "destination": "/website-element-widget.html"
-    }
-  ],
   "headers": [
     {
-      "source": "/assets/video/(.*)",
+      "source": "/assets/video/:path*",
       "headers": [
         {
           "key": "Accept-Ranges",
@@ -25,7 +15,7 @@
       ]
     },
     {
-      "source": "/assets/fonts/(.*)",
+      "source": "/assets/fonts/:path*",
       "headers": [
         {
           "key": "Cache-Control",
