@@ -31,109 +31,158 @@
         isMedia && e.preventDefault();
       });
     </script><style type="text/css"></style><style type="text/css"></style><link rel="stylesheet" type="text/css" href="./Love story_files/9bafa1f344f0e058.ltr.css"><link rel="stylesheet" type="text/css" href="./Love story_files/28f64f5a77f6500c.ltr.css"><link rel="stylesheet" type="text/css" href="./Love story_files/4b869a0c4034a3e7.ltr.css"><link rel="stylesheet" type="text/css" href="./Love story_files/2f3b114832a90fd5.ltr.css"><link rel="stylesheet" type="text/css" href="./Love story_files/dd6bdec6a9f4c205.ltr.css"><link rel="stylesheet" type="text/css" href="./Love story_files/60f0cdc861dbb375.ltr.css"><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Love story_files/m=el_main_css"><link rel="stylesheet" type="text/css" href="./Love story_files/bae505f43a7a4075.ltr.css"><link rel="stylesheet" type="text/css" href="./Love story_files/8c7fef8a62d6d0d8.ltr.css"><link rel="stylesheet" type="text/css" href="./Love story_files/49165a5d963019da.ltr.css"><link rel="stylesheet" type="text/css" href="./Love story_files/aed45af5ff6f640a.ltr.css"><link rel="stylesheet" type="text/css" href="./Love story_files/9a76616ea31c870e.ltr.css"><link rel="stylesheet" type="text/css" href="./Love story_files/34af9172ab5ea11a.ltr.css">
-<style id="video-loop-controls-fix">
-  /* Deshabilitar controles y eventos de puntero en los videos decorativos */
-  video {
-    pointer-events: none !important;
-    user-select: none !important;
-    -webkit-user-select: none !important;
-    -webkit-touch-callout: none !important;
-  }
-  video::-webkit-media-controls,
-  video::-webkit-media-controls-enclosure,
-  video::-webkit-media-controls-panel,
-  video::-webkit-media-controls-play-button,
-  video::-webkit-media-controls-start-playback-button,
-  video::-webkit-media-controls-current-time-display,
-  video::-webkit-media-controls-time-remaining-display,
-  video::-webkit-media-controls-timeline,
-  video::-webkit-media-controls-mute-button,
-  video::-webkit-media-controls-volume-slider,
-  video::-webkit-media-controls-fullscreen-button {
-    display: none !important;
-    -webkit-appearance: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-  }
+
+
+
+<style id="canva-video-clean-style">
+
+/* ===================================================
+   CANVA VIDEO PLAYER OVERLAY SUPPRESSION (100% CLEAN)
+   =================================================== */
+.ulaMQg,
+.Fmu5kg,
+.iisjMg,
+.l3zFeg,
+.o_FOhw,
+.GPRW5A,
+.Yzqi5Q,
+.xb8VZA,
+.mbwVrw,
+.B1z7cg,
+.ql1cFA,
+.a5O9wg,
+.o7DywQ,
+.dfnkZg,
+.oDxhiA,
+.xXKQUw,
+._2SiIgg,
+._6WyfQA,
+[class*="ulaMQg"],
+[class*="Fmu5kg"],
+[class*="xb8VZA"],
+[class*="Yzqi5Q"],
+[class*="l3zFeg"],
+[class*="GPRW5A"],
+[class*="B1z7cg"],
+[class*="oDxhiA"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  transform: none !important;
+  overflow: hidden !important;
+}
+
+video {
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+video::-webkit-media-controls,
+video::-webkit-media-controls-enclosure,
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-start-playback-button,
+video::-webkit-media-controls-current-time-display,
+video::-webkit-media-controls-time-remaining-display,
+video::-webkit-media-controls-timeline,
+video::-webkit-media-controls-mute-button,
+video::-webkit-media-controls-volume-slider,
+video::-webkit-media-controls-fullscreen-button {
+  display: none !important;
+  -webkit-appearance: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 </style>
-<script id="video-loop-fix-script">
+<script id="canva-video-clean-script">
 (function() {
-  function makeVideoInfiniteAndClean(v) {
+  // 1. Eliminar overlays del reproductor de Canva si el DOM los crea
+  function removeCanvaControls() {
+    var selectors = [
+      '.ulaMQg', '.Fmu5kg', '.iisjMg', '.l3zFeg', '.o_FOhw',
+      '.GPRW5A', '.Yzqi5Q', '.xb8VZA', '.B1z7cg', '.a5O9wg',
+      '.dfnkZg', '.oDxhiA', '.xXKQUw', '._2SiIgg', '._6WyfQA'
+    ];
+    selectors.forEach(function(sel) {
+      document.querySelectorAll(sel).forEach(function(el) {
+        el.style.setProperty('display', 'none', 'important');
+        el.style.setProperty('pointer-events', 'none', 'important');
+        el.style.setProperty('opacity', '0', 'important');
+        el.style.setProperty('visibility', 'hidden', 'important');
+        try { el.remove(); } catch(e){}
+      });
+    });
+  }
+
+  // 2. Hacer que todos los videos sean infinitos y sin pausas
+  function makeVideoInfinite(v) {
     if (!v) return;
     v.loop = true;
     v.muted = true;
     v.autoplay = true;
     v.playsInline = true;
     v.controls = false;
-    v.style.pointerEvents = 'none';
+    v.style.setProperty('pointer-events', 'none', 'important');
 
-    if (!v.hasAttribute('loop')) v.setAttribute('loop', '');
-    if (!v.hasAttribute('muted')) v.setAttribute('muted', '');
-    if (!v.hasAttribute('autoplay')) v.setAttribute('autoplay', '');
-    if (!v.hasAttribute('playsinline')) v.setAttribute('playsinline', '');
-    if (!v.hasAttribute('webkit-playsinline')) v.setAttribute('webkit-playsinline', '');
-    if (!v.hasAttribute('disablepictureinpicture')) v.setAttribute('disablepictureinpicture', '');
-    if (!v.hasAttribute('disableremoteplayback')) v.setAttribute('disableremoteplayback', '');
+    v.setAttribute('loop', '');
+    v.setAttribute('muted', '');
+    v.setAttribute('autoplay', '');
+    v.setAttribute('playsinline', '');
+    v.setAttribute('webkit-playsinline', '');
+    v.setAttribute('disablepictureinpicture', '');
+    v.setAttribute('disableremoteplayback', '');
     v.setAttribute('controlslist', 'nodownload nofullscreen noremoteplayback noplaybackrate');
     v.removeAttribute('controls');
 
-    // Escuchar el final del video para reiniciar inmediatamente (bucle infinito infalible)
-    if (!v.__loopHooked) {
-      v.__loopHooked = true;
+    if (!v.__loopBound) {
+      v.__loopBound = true;
       v.addEventListener('ended', function() {
-        try {
-          v.currentTime = 0;
-          var p = v.play();
-          if (p && p.catch) p.catch(function(){});
-        } catch(e){}
+        v.currentTime = 0;
+        var p = v.play();
+        if (p && p.catch) p.catch(function(){});
       });
       v.addEventListener('pause', function() {
-        // Si no está intencionalmente detenido, reanudar
-        try {
+        setTimeout(function() {
           var p = v.play();
           if (p && p.catch) p.catch(function(){});
-        } catch(e){}
+        }, 20);
       });
     }
 
     if (v.paused) {
-      try {
-        var p = v.play();
-        if (p && p.catch) p.catch(function(){});
-      } catch(e){}
+      var p = v.play();
+      if (p && p.catch) p.catch(function(){});
     }
   }
 
-  function scanAllVideos() {
-    document.querySelectorAll('video').forEach(makeVideoInfiniteAndClean);
+  function runAll() {
+    removeCanvaControls();
+    document.querySelectorAll('video').forEach(makeVideoInfinite);
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', scanAllVideos);
+    document.addEventListener('DOMContentLoaded', runAll);
   } else {
-    scanAllVideos();
+    runAll();
   }
 
-  // Observador para videos inyectados dinámicamente por Canva
-  var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(m) {
-      m.addedNodes.forEach(function(node) {
-        if (node.nodeType === 1) {
-          if (node.tagName === 'VIDEO') {
-            makeVideoInfiniteAndClean(node);
-          } else if (node.querySelectorAll) {
-            node.querySelectorAll('video').forEach(makeVideoInfiniteAndClean);
-          }
-        }
-      });
-    });
+  // Observador continuo de cambios
+  var obs = new MutationObserver(function(mutations) {
+    removeCanvaControls();
+    document.querySelectorAll('video').forEach(makeVideoInfinite);
   });
+  obs.observe(document.documentElement, { childList: true, subtree: true });
 
-  observer.observe(document.documentElement, { childList: true, subtree: true });
-
-  // Verificación periódica ligera
-  setInterval(scanAllVideos, 800);
+  setInterval(runAll, 300);
 })();
 </script>
 
