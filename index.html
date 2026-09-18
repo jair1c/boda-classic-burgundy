@@ -566,6 +566,12 @@ video {
     text-align: center !important;
     display: inline-block !important;
   }
+
+  /* Evitar recorte de la floritura final en Rachel & Carter */
+  #LBHXJntVx8NLs9fr,
+  #LBHXJntVx8NLs9fr * {
+    overflow: visible !important;
+  }
 </style>
 <script id="envelope-script">
 (function() {
@@ -574,9 +580,8 @@ video {
 
   function applyResponsiveScale() {
     var winW = window.innerWidth || document.documentElement.clientWidth;
+    var winH = window.innerHeight || document.documentElement.clientHeight || 667;
     var isMobile = winW <= 820;
-    var baseW = 680;
-    var scale = isMobile ? Math.min(1, winW / baseW) : 1;
 
     document.querySelectorAll('section.rGeu6w').forEach(function(sec) {
       var canvas = sec.querySelector('._8jGYJw');
@@ -587,15 +592,29 @@ video {
       if (!canvas.dataset.originalHeight) canvas.dataset.originalHeight = originalH;
 
       if (isMobile) {
-        canvas.style.transformOrigin = '952.5px 0';
-        canvas.style.transform = 'scale(' + scale + ')';
-        innerDiv.style.height = (originalH * scale) + 'px';
-        sec.style.height = (originalH * scale) + 'px';
+        if (sec.id === 'PByb2KV5jZ9P1h1c') {
+          // Sección 0 (Sobre cerrado): ocupa la pantalla completa de forma impecable
+          var scale0 = Math.min(1, winW / 980);
+          var scaledH = originalH * scale0;
+          var topOffset = Math.max(0, (winH - scaledH) / 2);
+          canvas.style.transformOrigin = '952.5px 0';
+          canvas.style.transform = 'translateY(' + topOffset + 'px) scale(' + scale0 + ')';
+          innerDiv.style.height = winH + 'px';
+          sec.style.height = winH + 'px';
+          sec.style.minHeight = '100vh';
+        } else {
+          var scale = Math.min(1, winW / 680);
+          canvas.style.transformOrigin = '952.5px 0';
+          canvas.style.transform = 'scale(' + scale + ')';
+          innerDiv.style.height = (originalH * scale) + 'px';
+          sec.style.height = (originalH * scale) + 'px';
+        }
       } else {
         canvas.style.transform = '';
         canvas.style.transformOrigin = '';
         innerDiv.style.height = originalH + 'px';
         sec.style.height = originalH + 'px';
+        sec.style.minHeight = '';
       }
     });
   }
